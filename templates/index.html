@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="file"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 80%;
+            max-width: 400px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 24px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .meme-container {
+            margin-top: 40px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generate Your Meme</h1>
+        
+        <!-- Form to upload image and add text -->
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="top_text" placeholder="Top Text" required><br>
+            <input type="text" name="bottom_text" placeholder="Bottom Text" required><br>
+            <input type="file" name="image" accept="image/*" required><br>
+            <button type="submit">Generate Meme</button>
+        </form>
+
+        <!-- Display the generated meme -->
+        {% if meme %}
+        <div class="meme-container">
+            <h3>Your Generated Meme</h3>
+            <img src="{{ url_for('static', filename=meme) }}" alt="Generated Meme">
+        </div>
+        {% endif %}
+
+        <!-- Display fetched random meme -->
+        {% if meme_url %}
+        <div class="meme-container">
+            <h3>Random Meme</h3>
+            <img src="{{ meme_url }}" alt="Random Meme">
+        </div>
+        {% endif %}
+
+        <!-- <div class="footer">
+            <p>Powered by <a href="https://imgflip.com/" target="_blank">Imgflip API</a> and <a href="https://flask.palletsprojects.com/" target="_blank">Flask</a></p>
+        </div> -->
+    </div>
+</body>
+</html>
